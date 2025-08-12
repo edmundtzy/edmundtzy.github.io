@@ -1,154 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Naasdame</title>
+    <title>Your Name - Personal Page</title>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --primary-color: #333;
-            --secondary-color: #fff;
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            --header-height: 60px;
+        /* Custom styles for the fixed background images */
+        .section-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            will-change: opacity;
         }
 
-        /* Basic Reset & Typography */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .section-bg.active {
+            opacity: 1;
         }
 
-        body {
-            font-family: var(--font-family);
-            line-height: 1.6;
-            color: var(--primary-color);
-            background-color: var(--secondary-color);
-            scroll-behavior: smooth;
+        /* Custom scroll-snap behavior for a "page-like" feel on scroll */
+        html {
+            scroll-snap-type: y mandatory;
         }
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            background-color: rgba(186, 11, 11, 0.9);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-        }
-
-        nav a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1em;
-            margin: 0 20px;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #007bff; /* Example hover color */
-        }
-
-        /* Sections */
         .section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            min-height: 100vh;
-            padding-top: var(--header-height); /* Offset for the fixed header */
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            padding: 20px;
+            scroll-snap-align: start;
         }
 
-        .section.active {
-            opacity: 1;
-        }
-
-        .section h2 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .section p {
-            max-width: 800px;
-            text-align: center;
-            font-size: 1.2em;
-        }
-
-        /* Fading Logic (JavaScript handles the .active class) */
-        .section.fade-in {
-            opacity: 1;
-        }
-
-        .section.fade-out {
-            opacity: 0;
+        /* Responsive styling for nav links */
+        @media (max-width: 640px) {
+            .nav-link {
+                margin: 0 8px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#research">Research</a>
-            <a href="#teaching">Teaching</a>
+<body class="bg-gray-900 text-white font-sans">
+
+    <!-- Floating Pink Header -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto p-4 flex justify-center items-center backdrop-blur-sm bg-pink-500/80 rounded-b-xl shadow-lg">
+            <a href="#about" class="nav-link text-white font-semibold mx-4 hover:text-pink-200 transition-colors duration-300">About</a>
+            <a href="#research" class="nav-link text-white font-semibold mx-4 hover:text-pink-200 transition-colors duration-300">Research</a>
+            <a href="#teaching" class="nav-link text-white font-semibold mx-4 hover:text-pink-200 transition-colors duration-300">Teaching</a>
         </nav>
     </header>
 
     <main>
-        <section id="about" class="section active">
-            <h2>About</h2>
-            <p>
-                Welcome to my personal page. I am a researcher and educator with a passion for [Your field of study].
-                My work focuses on [A brief, compelling summary of your work].
-            </p>
+        <!-- About Section -->
+        <section id="about" class="section relative min-h-screen flex items-center justify-center text-center p-8 overflow-hidden">
+            <!-- Background Image 1 -->
+            <div class="section-bg active" style="background-image: url('https://images.unsplash.com/photo-1549429547-0e9e4a3c10e6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            
+            <div class="z-10 bg-gray-900/60 p-8 rounded-xl backdrop-blur-sm shadow-2xl max-w-4xl">
+                <h2 class="text-4xl sm:text-6xl font-bold mb-4">About</h2>
+                <p class="text-lg sm:text-xl font-light leading-relaxed">
+                    Welcome to my personal page. I am a researcher and educator with a passion for [Your field of study]. My work focuses on [A brief, compelling summary of your work]. This website serves as a space to share my professional journey and interests.
+                </p>
+            </div>
         </section>
 
-        <section id="research" class="section">
-            <h2>Research</h2>
-            <p>
-                My research interests include [Topic 1], [Topic 2], and [Topic 3]. I have published papers on [Specific achievements or projects].
-                You can find a list of my publications on [Link to your publications or a dedicated page].
-            </p>
+        <!-- Research Section -->
+        <section id="research" class="section relative min-h-screen flex items-center justify-center text-center p-8 overflow-hidden">
+            <!-- Background Image 2 -->
+            <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1510465243292-1cf79c5c9945?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            
+            <div class="z-10 bg-gray-900/60 p-8 rounded-xl backdrop-blur-sm shadow-2xl max-w-4xl">
+                <h2 class="text-4xl sm:text-6xl font-bold mb-4">Research</h2>
+                <p class="text-lg sm:text-xl font-light leading-relaxed">
+                    My research interests include [Topic 1], [Topic 2], and [Topic 3]. I have published papers on [Specific achievements or projects] and am always exploring new frontiers in my field. You can find a detailed list of my publications and ongoing projects [Link to your publications or a dedicated page].
+                </p>
+            </div>
         </section>
 
-        <section id="teaching" class="section">
-            <h2>Teaching</h2>
-            <p>
-                I am an instructor for courses on [Course 1] and [Course 2]. I believe in fostering a collaborative
-                and engaging learning environment. You can access my teaching materials and course outlines [Link to teaching resources].
-            </p>
+        <!-- Teaching Section -->
+        <section id="teaching" class="section relative min-h-screen flex items-center justify-center text-center p-8 overflow-hidden">
+            <!-- Background Image 1 (Reused) -->
+            <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1549429547-0e9e4a3c10e6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            
+            <div class="z-10 bg-gray-900/60 p-8 rounded-xl backdrop-blur-sm shadow-2xl max-w-4xl">
+                <h2 class="text-4xl sm:text-6xl font-bold mb-4">Teaching</h2>
+                <p class="text-lg sm:text-xl font-light leading-relaxed">
+                    I am an instructor for courses on [Course 1] and [Course 2]. I believe in fostering a collaborative and engaging learning environment. You can access my teaching materials and course outlines [Link to teaching resources]. I'm always open to connecting with current and prospective students.
+                </p>
+            </div>
         </section>
     </main>
 
     <script>
         const sections = document.querySelectorAll('.section');
+        const backgrounds = document.querySelectorAll('.section-bg');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Use the Intersection Observer API for a performant transition
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.5 // Trigger when 50% of the section is visible
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const sectionId = entry.target.id;
+                const correspondingBg = entry.target.querySelector('.section-bg');
+                
+                // First, reset all backgrounds and navigation links
+                backgrounds.forEach(bg => bg.classList.remove('active'));
+                navLinks.forEach(link => link.classList.remove('font-bold', 'text-pink-200'));
+
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    entry.target.classList.remove('active');
+                    // Activate the background and header link for the visible section
+                    correspondingBg.classList.add('active');
+                    const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('font-bold', 'text-pink-200');
+                    }
                 }
             });
         }, observerOptions);
 
+        // Observe each section
         sections.forEach(section => {
             observer.observe(section);
         });
