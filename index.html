@@ -1,6 +1,157 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <h1> Hello worl</h1>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name</title>
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #fff;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --header-height: 60px;
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1em;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #007bff; /* Example hover color */
+        }
+
+        /* Sections */
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: var(--header-height); /* Offset for the fixed header */
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            padding: 20px;
+        }
+
+        .section.active {
+            opacity: 1;
+        }
+
+        .section h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section p {
+            max-width: 800px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        /* Fading Logic (JavaScript handles the .active class) */
+        .section.fade-in {
+            opacity: 1;
+        }
+
+        .section.fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#research">Research</a>
+            <a href="#teaching">Teaching</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="section active">
+            <h2>About</h2>
+            <p>
+                Welcome to my personal page. I am a researcher and educator with a passion for [Your field of study].
+                My work focuses on [A brief, compelling summary of your work].
+            </p>
+        </section>
+
+        <section id="research" class="section">
+            <h2>Research</h2>
+            <p>
+                My research interests include [Topic 1], [Topic 2], and [Topic 3]. I have published papers on [Specific achievements or projects].
+                You can find a list of my publications on [Link to your publications or a dedicated page].
+            </p>
+        </section>
+
+        <section id="teaching" class="section">
+            <h2>Teaching</h2>
+            <p>
+                I am an instructor for courses on [Course 1] and [Course 2]. I believe in fostering a collaborative
+                and engaging learning environment. You can access my teaching materials and course outlines [Link to teaching resources].
+            </p>
+        </section>
+    </main>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 // Trigger when 50% of the section is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
 </html>
